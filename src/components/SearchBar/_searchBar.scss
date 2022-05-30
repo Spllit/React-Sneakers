@@ -1,0 +1,28 @@
+@import '../Styles/variables';
+
+.search-bar{
+    &__container{
+        display: flex;
+        border: 1px solid $border-color;
+        align-items: center;
+        padding: 15px;
+        border-radius: 10px;
+        &:focus-within{
+            border: 1px solid #000
+        }
+    }
+    &__icon{
+        margin-right: 15px;
+    }
+    &__input{
+        border: none;
+        @extend %font-family;
+        font-weight: 400;
+        font-size: 16px;
+        color: #000;
+        &::placeholder{
+            color: $small-text;
+        }
+        outline: none;
+    }
+}

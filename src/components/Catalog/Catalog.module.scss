@@ -1,0 +1,21 @@
+@import '../Styles/variables';
+.catalog{
+    .title{
+        @extend %font-family;
+        font-weight: 700;
+        font-size: 32px;
+    }
+    .header{
+        margin-bottom: 60px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .content{
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(5, 1fr);
+        row-gap: 4%;
+        column-gap: 2%;
+        grid-auto-flow: row;
+    }
+}

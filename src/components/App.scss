@@ -1,0 +1,25 @@
+@import './Styles/_reset';
+@import './Styles/_variables';
+@import './Header/header';
+body{
+    background-color: $main-color;
+}
+.wrapper{
+    position: relative;
+    background-color: $bg-color;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 5%;
+    width: 90%;
+    border-radius: 20px;
+    
+    .container{
+        margin: 0 auto;
+        width: 95%;
+    }
+}
+.section-devider{
+    height: 1px;
+    width: 100%;
+    background-color: $border-color;
+}

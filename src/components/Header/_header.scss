@@ -1,0 +1,63 @@
+@import '../Styles/variables';
+.header{
+    min-height: 130px;
+    display: grid;
+    &__container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__logo-container{
+        display: flex;
+        flex-basis: 20rem;
+    }
+    &__nav{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    &__bag{
+        button{
+            display: flex;
+            svg{
+                margin-right: 10px;
+            }
+        }
+    }
+}
+.logo{
+    @extend %font-family;
+    h2{
+        font-weight: 700;
+        font-size: 20px;
+        color: $main-text;
+    }
+    p{
+        font-weight: 400;
+        font-size: 14px;
+        color: $small-text;
+    }
+    img{
+        width: 40px;
+        height: 40px;
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+        margin-left: 16px;
+    }
+}
+.nav{
+    span{
+        @extend %font-family;
+        font-weight: 600;
+        font-size: 14px;
+    }
+    &__coast{
+        margin-right: 5px;
+    }
+    &__item{
+        button{
+            margin-right: 30px;
+        }
+    }
+}
