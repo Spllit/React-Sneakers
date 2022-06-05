@@ -3,26 +3,26 @@ import Card from '../Card/Card'
 import SearchBar from '../SearchBar/SearchBar';
 import {getData, postData, updateData, deleteData} from '../services/getData'
 import styles from './Catalog.module.scss'
-
+import CardSkeleton from '../CardSkeleton/CardSkeleton';
 function Catalog({title, urlAdress}){
     const [data, setData] = useState([])
     const [bagItems, setBagItems] = useState([])
     const [visibleItems, setVisibleItems] = useState(data)
     const [favorites, setFavorites] = useState([])
+    const [isLoading, setIsLoading] = useState([true])
     useEffect(() => {
-        getData(urlAdress)
-        .then(res => {
-            setData(res)
-            setVisibleItems(res)
+        const getAllItems = Promise.all([
+            new Promise(resolve => resolve(getData('bagItems'))),
+            new Promise(resolve => resolve(getData('favorites'))),
+            new Promise(resolve => resolve(getData(urlAdress))),
+        ])
+        getAllItems.then(res => {
+            setBagItems(res[0])
+            setFavorites(res[1])
+            setData(res[2])
+            setVisibleItems(res[2])
+            setIsLoading(false)
         })
-        }, [])
-    useEffect(() => {
-        getData('bagItems')
-        .then(res => setBagItems(res))
-    }, [])
-    useEffect(() => {
-        getData('favorites')
-        .then(res => setFavorites(res))
     }, [])
     const search = (value) => {
         if(value.length === 0){
@@ -34,35 +34,35 @@ function Catalog({title, urlAdress}){
             })) 
         }
     }
-    const addCardToBag = ({name, cost, url, id, isAdded}, adress) => {
-        if(bagItems.find(item => item.id === id)){
-            console.log('if')
-            deleteData(adress, id)
-            console.log((bagItems))
-            setBagItems(item => item.filter(element => element.id !== id))
+    const addedCardHandler = async ({name, cost, url, id, isAdded}, adress) => {
+        if(bagItems.find(item => item.name === name)){
+            await deleteData(adress, (bagItems.find(item => item.name === name)).id)
+            setBagItems(item => item.filter(element => element.name !== name))
         }
         else{
-            console.log('else')
-            console.log(id)
-            setBagItems([{name, cost, url, id, isAdded}])
-            postData({name, cost, url, id, isAdded}, adress)
+            const res = await postData({name, cost, url, id, isAdded}, adress)
+            setBagItems([res])
+            
         }
     }
-    const addFavoriteCard = ({name, cost, url, id, isFavorite}, adress) => {
-        if(favorites.find(item => item.id === id)){
-            deleteData(adress, id)
-            setFavorites(item => item.filter(element => element.id !== id))
+    const favoriteCardHandler = async ({name, cost, url, id, isFavorite}, adress) => {
+        if(favorites.find(item => item.name === name)){
+            await deleteData(adress, (favorites.find(item => item.name === name)).id)
+            setFavorites(item => item.filter(element => element.name !== name))
         }
         else{
-            const res = postData({name, cost, url, id, isFavorite}, adress)
-            setBagItems([res])
+            const res = await postData({name, cost, url, id, isFavorite}, adress)
+            setFavorites([res])
         }
     }
     const renderCards = visibleItems.map(item => {
-        return (<Card
+        return (
+            <Card
             key ={item.id}
-            addCardToBag = {(item, adress) => addCardToBag(item, adress)}
-            addCardToFavorite = {(item, adress) => addFavoriteCard(item, adress)}
+            addedCardHandler = {(item, adress) => addedCardHandler(item, adress)}
+            favoriteCardHandler = {(item, adress) => favoriteCardHandler(item, adress)}
+            favorite = {favorites.some(favoritedItem => favoritedItem.name === item.name)}
+            added = {bagItems.some(addedItem => addedItem.name === item.name)}
             {...item}/>
         )
     })
@@ -74,7 +74,8 @@ function Catalog({title, urlAdress}){
                 search = {(value) => search(value)}/>
             </div>
             <div className={styles.content}>
-                {renderCards}
+                {/* {renderCards} */}
+               <CardSkeleton/>
             </div>
         </main>
     )

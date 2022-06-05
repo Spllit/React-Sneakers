@@ -3,26 +3,25 @@ import styles from './Card.module.scss'
 import {ReactComponent as Add} from './img/add.svg'
 import {ReactComponent as Added} from './img/added.svg'
 import {ReactComponent as Like} from './img/like.svg'
-function Card({name, cost, url, id,addCardToBag, addCardToFavorite}){
-    const [isAdded, setAdded] = useState(false)
-    const [isFavorite, setFavorite] = useState(false)
+function Card({name, cost, url, id, added, favorite, addedCardHandler, favoriteCardHandler}){
+    const [isAdded, setAdded] = useState(added)
+    const [isFavorite, setFavorite] = useState(favorite)
 
     const onAddClick = () => {
         setAdded(isAdded => !isAdded)
-        addCardToBag({name, cost, url, id, isAdded}, 'bagItems')
+        addedCardHandler({name, cost, url, id, isAdded}, 'bagItems')
     }
     const onFavoriteClick =() => {
         setFavorite(isFavorite => !isFavorite)
-        console.log({name, cost, url, id, isFavorite})
-        addCardToFavorite({name, cost, url, id, isFavorite}, 'favorites')
+        favoriteCardHandler({name, cost, url, id, isFavorite}, 'favorites')
     }
     const plusIcon =  <button className={styles.add}
-    onClick = {() => onAddClick()}>
+    onClick = {onAddClick}>
         <Add/>
     </button>
     
     const addedIcon = <button className={styles.added}
-    onClick = {() => onAddClick()}>
+    onClick = {onAddClick}>
         <Added/>
     </button>
     return(
@@ -31,7 +30,7 @@ function Card({name, cost, url, id,addCardToBag, addCardToFavorite}){
                 <div className={styles.url}>
                     <img src={url} alt="Sneakers" />
                 </div>
-                <h2 className={styles.name}>{name}</h2>
+                <h2 className={styles.name}>{name}</h2> 
                 <div className={styles.cost}>
                     <div className={styles.costLeft}>
                         <span className={styles.costInfo}>Цена</span>
@@ -42,7 +41,7 @@ function Card({name, cost, url, id,addCardToBag, addCardToFavorite}){
                        {isAdded ? addedIcon : plusIcon}
                 </div>
                 <button className={isFavorite ? styles.liked : styles.like}
-                    onClick = {() => onFavoriteClick()}>
+                    onClick = {onFavoriteClick}>
                     <Like/>
                 </button>
             </div>

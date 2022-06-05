@@ -12,10 +12,9 @@
     }
     .content{
         display: grid;
-        grid-template-rows: repeat(3, 1fr);
-        grid-template-columns: repeat(5, 1fr);
-        row-gap: 4%;
-        column-gap: 2%;
-        grid-auto-flow: row;
+        grid-template-rows: repeat( auto-fit, minmax(260px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        row-gap: 3%;
+        column-gap: 3%;
     }
 }
