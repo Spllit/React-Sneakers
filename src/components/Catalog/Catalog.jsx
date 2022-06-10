@@ -3,18 +3,18 @@ import Card from '../Card/Card'
 import SearchBar from '../SearchBar/SearchBar';
 import {getData, postData, updateData, deleteData} from '../services/getData'
 import styles from './Catalog.module.scss'
-import CardSkeleton from '../CardSkeleton/CardSkeleton';
+import ContentLoader from "react-content-loader"
 function Catalog({title, urlAdress}){
     const [data, setData] = useState([])
     const [bagItems, setBagItems] = useState([])
     const [visibleItems, setVisibleItems] = useState(data)
     const [favorites, setFavorites] = useState([])
-    const [isLoading, setIsLoading] = useState([true])
+    const [loading, setIsLoading] = useState(true)
     useEffect(() => {
         const getAllItems = Promise.all([
             new Promise(resolve => resolve(getData('bagItems'))),
             new Promise(resolve => resolve(getData('favorites'))),
-            new Promise(resolve => resolve(getData(urlAdress))),
+            new Promise(resolve => resolve(getData(urlAdress))), 
         ])
         getAllItems.then(res => {
             setBagItems(res[0])
@@ -55,17 +55,45 @@ function Catalog({title, urlAdress}){
             setFavorites([res])
         }
     }
-    const renderCards = visibleItems.map(item => {
-        return (
-            <Card
-            key ={item.id}
-            addedCardHandler = {(item, adress) => addedCardHandler(item, adress)}
-            favoriteCardHandler = {(item, adress) => favoriteCardHandler(item, adress)}
-            favorite = {favorites.some(favoritedItem => favoritedItem.name === item.name)}
-            added = {bagItems.some(addedItem => addedItem.name === item.name)}
-            {...item}/>
+    const renderCards = () => {
+        if(loading){
+            return(
+                [...Array(10)].map((item, index) => {
+                    return(
+                        <ContentLoader 
+                            key = {index}
+                            speed={2}
+                            width={250}
+                            height={340}
+                            viewBox="0 0 250 340"
+                            backgroundColor="#f3f3f3"
+                            foregroundColor="#ecebeb">
+                            <rect x="30" y="30" rx="10" ry="10" width="190" height="160" /> 
+                            <rect x="30" y="210" rx="10" ry="10" width="190" height="15" /> 
+                            <rect x="30" y="230" rx="10" ry="10" width="140" height="15" /> 
+                            <rect x="30" y="278" rx="10" ry="10" width="110" height="15" /> 
+                            <rect x="218" y="278" rx="10" ry="10" width="32" height="32" />
+                        </ContentLoader>
+                    )
+                })
+            )
+        }
+        return(
+                visibleItems.map(item => {
+                return (
+                    <Card
+                    key ={item.id}
+                    addedCardHandler = {(item, adress) => addedCardHandler(item, adress)}
+                    favoriteCardHandler = {(item, adress) => favoriteCardHandler(item, adress)}
+                    favorite = {favorites.some(favoritedItem => favoritedItem.name === item.name)}
+                    added = {bagItems.some(addedItem => addedItem.name === item.name)}
+                    {...item}
+                    loading = {loading}/>
+                )
+            })
         )
-    })
+    }
+
     return(
         <main className={styles.catalog}>
             <div className={styles.header}>
@@ -74,8 +102,7 @@ function Catalog({title, urlAdress}){
                 search = {(value) => search(value)}/>
             </div>
             <div className={styles.content}>
-                {/* {renderCards} */}
-               <CardSkeleton/>
+                {renderCards()}
             </div>
         </main>
     )

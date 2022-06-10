@@ -16,6 +16,7 @@ function renderCards(items, deleteItem){
     })
     return cards
 }
+
 function FullBag({bagItems, deleteItem}){
     return(
         <React.Fragment>

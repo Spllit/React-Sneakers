@@ -6,20 +6,51 @@ import {getData, deleteData} from '../services/getData'
 
 function ShoppingBag({setBagisOpen}){
     const [bagItems, setBagItems] = useState([])
+    const [total, setTotal] = useState(0)
+    const [tax, setTax] = useState(0)
     useEffect(() => {
         getData('bagItems')
         .then(res => {
-            console.log(res)
-            setBagItems([...res])
+            setBagItems(() => [...res])
         })
 
     }, [])
-    console.log(bagItems)
     const deleteItem = id => {
         const newArray = bagItems.filter(item => item.id !== id)
         setBagItems(newArray)
         deleteData('bagItems', id)
     }
+    useEffect(() => {
+        if(bagItems.length === 0){
+
+            console.log('if')
+            setTotal(0)
+        }
+        else{
+            bagItems.reduce((prevValue, currentValue) => {
+                setTotal(Number(prevValue.cost) + Number(currentValue.cost))
+                return total
+            })
+        }
+        setTax(tax/100*5)
+    }, [bagItems,total, tax])
+
+    // const calcTotal = () => {   
+    //     if(bagItems.length === 0){
+    //         console.log(bagItems)
+    //         setTotal(0)
+    //         return total
+    //     }
+    //     bagItems.reduce((prevValue, currentValue) => {
+    //         setTotal(Number(prevValue.cost) + Number(currentValue.cost))
+    //         console.log(Number(currentValue.cost))
+    //         return total
+    //     })
+    // }
+    // const calcTax = () => {
+    //     setTax(tax/100*5)
+    //     return tax
+    // }
     return(
         <div className='bag'>
             <div className="bag__container">
@@ -34,7 +65,9 @@ function ShoppingBag({setBagisOpen}){
                     </div>
                     {bagItems.length === 0 && <EmptyBag/>}
                     {bagItems.length > 0 &&  <FullBag bagItems = {bagItems}
-                    deleteItem = {(id) => deleteItem(id)}/> }
+                    deleteItem = {(id) => deleteItem(id)}
+                    total = {total}
+                    tax = {tax}/> }
                     {/* <IsOrdered/> */}
                 </div>
             </div>

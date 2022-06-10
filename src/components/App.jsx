@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Route, Routes} from 'react-router-dom'
 import Header from './Header/Header'
-import Catalog from './Catalog/Catalog'
+// import Catalog from './Catalog/Catalog'
 import ShoppingBag from './Shopping bag/ShoppingBag'
 import Home from './Pages/Home'
 import Favorites from './Pages/Favorites'

@@ -1,5 +1,6 @@
 @import '../Styles/variables';
 .catalog{
+    padding-bottom: 4rem;
     .title{
         @extend %font-family;
         font-weight: 700;
@@ -12,9 +13,9 @@
     }
     .content{
         display: grid;
-        grid-template-rows: repeat( auto-fit, minmax(260px, 1fr));
-        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-        row-gap: 3%;
-        column-gap: 3%;
+        grid-template-rows: repeat( auto-fit, minmax(22rem, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+        row-gap: 3rem;
+        column-gap: 4rem;
     }
 }

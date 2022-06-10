@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ContentLoader from "react-content-loader"
 import styles from './Card.module.scss'
 import {ReactComponent as Add} from './img/add.svg'
 import {ReactComponent as Added} from './img/added.svg'
@@ -45,7 +46,6 @@ function Card({name, cost, url, id, added, favorite, addedCardHandler, favoriteC
                     <Like/>
                 </button>
             </div>
-            
         </div>
     )
 }
