@@ -3,21 +3,19 @@ const urlStorage = {
     'items': 'https://627fc595be1ccb0a4664a105.mockapi.io/items',
     'bagItems': 'https://627fc595be1ccb0a4664a105.mockapi.io/items/1/bagItems',
     'favorites': 'https://627fc595be1ccb0a4664a105.mockapi.io/items/1/favorites',
+    'orders': 'https://627fc595be1ccb0a4664a105.mockapi.io/orders'
 }
 async function getData(adress){
     const {data} = await axios.get(urlStorage[adress])
-    // const result = await fetch(urlStorage[adress])
     return data
 }
 async function postData(card, adress){
     const {data} = await axios.post(urlStorage[adress], card)
-    console.log(data)
     return(data)
 }
 
 async function deleteData(adress, id){
     const {data} = await axios.delete(`${urlStorage[adress]}/${id}`)
-    console.log(data)
     return (data)
 }
 async function updateData(adress, id){
@@ -25,9 +23,21 @@ async function updateData(adress, id){
         method: 'PUT',
     })
 }
+async function createOrder(data, adress){
+    await data.forEach(el => {
+        postData({
+            name: el.name,
+            cost: el.cost, 
+            url: el.url,
+            id: el.id,
+            isAdded: el.isAdded
+        }, adress)
+    })
+}
 export {
     getData,
     postData,
     deleteData,
     updateData,
+    createOrder,
 }

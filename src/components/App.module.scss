@@ -1,0 +1,46 @@
+@import './Styles/_reset';
+@import './Styles/_variables';
+body{
+    background-color: $main-color;
+}
+.wrapper{
+    position: relative;
+    background-color: $bg-color;
+    margin: 0 auto;
+    margin-top: 5%;
+    width: 80%;
+    border-radius: 20px;
+    
+    .container{
+        margin: 0 auto;
+        width: 95%;
+    }
+}
+.sectionDevider{
+    height: 1px;
+    width: 100%;
+    background-color: $border-color;
+}
+@media screen and (min-width:1400px) and (max-width:1830px){
+    .wrapper{
+        width: 85%;
+    }
+}
+@media screen and (min-width:768px) and (max-width:1400px){
+    .wrapper{
+        width: 90%;
+    }
+}
+@media screen and (min-width:425px) and (max-width:768px){
+    .wrapper{
+        width: 95%;
+    }
+}
+@media screen and (max-width: 642px){
+    .wrapper{
+        width: 100%;
+    }
+}
+.ovh{
+    overflow: hidden;
+}

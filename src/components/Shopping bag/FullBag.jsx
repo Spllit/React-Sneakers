@@ -1,7 +1,7 @@
 import React from 'react';
 import CardMinimized from '../CardMinimized/CardMinimized';
 import ButtonSubmit from '../ButtonSubmit/ButtonSubmit';
-import'./_fullBag.scss'
+import style from './fullBag.module.scss'
 
 function renderCards(items, deleteItem){
     let cards = items.map((item, index) => {
@@ -16,30 +16,30 @@ function renderCards(items, deleteItem){
     })
     return cards
 }
-
-function FullBag({bagItems, deleteItem}){
+function FullBag({bagItems, deleteItem, total, tax, action}){
     return(
-        <React.Fragment>
-            <div className="bag__content">
+        <>
+            <div className={style.content}>
                 {renderCards(bagItems, deleteItem)}
             </div>
-            <div className="bag__footer footer">
-                <ul className='footer__total cheque'>
+            <div className={style.footer}>
+                <ul className={style.cheque}>
                     <li>
                         <span>Итого: </span>
-                        <span className='cheque__space'></span>
-                        <span className='cheque__coast'>21 498 <span>руб.</span></span>
+                        <span className= {style.space}></span>
+                        <span className={style.coast}>{total}<span>руб.</span></span>
                     </li>
                     <li>
                     <span>Налог 5%: </span>
-                        <span className='cheque__space'></span>
-                        <span className='cheque__coast'>1074<span>руб.</span></span>
+                        <span className={style.space}></span>
+                        <span className={style.coast}>{tax}<span>руб.</span></span>
                     </li>
                 </ul>
                 <ButtonSubmit
-                content = {'Оформить заказ'}/>
+                content = {'Оформить заказ'}
+                action = {() => action()}/>
             </div>
-        </React.Fragment>
+        </>
     )
 }
 export default FullBag

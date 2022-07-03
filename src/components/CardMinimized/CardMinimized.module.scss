@@ -41,18 +41,18 @@
             align-self: start;
             margin-right: 10px;
         }
-        &Remove{
-            place-self: center;
-            grid-row: 1/3;
-            height: 40%;
-            width: 40%;
-            @extend %small-btn;
-            &:hover{
-                background-color: #ffd0d0;
-                svg{
-                    fill: #f97575;
-            }
+    }
+    .remove{
+        place-self: center;
+        grid-row: 1/3;
+        height: 40%;
+        width: 40%;
+        @extend %small-btn;
+        &:hover{
+            background-color: #ffd0d0;
+            svg{
+                fill: #f97575;
         }
-        }
+    }
     }
 }

@@ -1,9 +1,10 @@
 import React from 'react';
-import './_buttonSubmit.scss'
-function ButtonSubmit(props){
-    const {content} = props
+import style from './buttonSubmit.module.scss'
+import { ShoppingBagContext } from '../Context/Context';
+function ButtonSubmit({content, reversed = false, action}){
     return(
-        <button className='submit-button'>
+        <button className={reversed ? style.reversed : style.submitButton}
+        onClick = {() => action()}>
             <span>
                {content}
             </span>

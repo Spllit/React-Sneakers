@@ -1,47 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import ContentLoader from "react-content-loader"
-import styles from './Card.module.scss'
+import style from './Card.module.scss'
 import {ReactComponent as Add} from './img/add.svg'
 import {ReactComponent as Added} from './img/added.svg'
 import {ReactComponent as Like} from './img/like.svg'
 function Card({name, cost, url, id, added, favorite, addedCardHandler, favoriteCardHandler}){
-    const [isAdded, setAdded] = useState(added)
-    const [isFavorite, setFavorite] = useState(favorite)
-
+    const [isAdded, setIsAdded] = useState(added)
+    const [isFavorite, setIsFavorite] = useState(favorite)
+    useEffect(() => {
+        setIsAdded(added)
+        setIsFavorite(favorite)
+    }, [added, favorite])
     const onAddClick = () => {
-        setAdded(isAdded => !isAdded)
+        setIsAdded(isAdded => !isAdded)
         addedCardHandler({name, cost, url, id, isAdded}, 'bagItems')
     }
     const onFavoriteClick =() => {
-        setFavorite(isFavorite => !isFavorite)
+        setIsFavorite(isFavorite => !isFavorite)
         favoriteCardHandler({name, cost, url, id, isFavorite}, 'favorites')
     }
-    const plusIcon =  <button className={styles.add}
+    const plusIcon =  <button className={style.add}
     onClick = {onAddClick}>
         <Add/>
     </button>
     
-    const addedIcon = <button className={styles.added}
+    const addedIcon = <button className={style.added}
     onClick = {onAddClick}>
         <Added/>
     </button>
     return(
-        <div className={styles.card}>
-            <div className={styles.container}>
-                <div className={styles.url}>
+        <div className={style.card}>
+            <div className={style.container}>
+                <div className={style.img}>
                     <img src={url} alt="Sneakers" />
                 </div>
-                <h2 className={styles.name}>{name}</h2> 
-                <div className={styles.cost}>
-                    <div className={styles.costLeft}>
-                        <span className={styles.costInfo}>Цена</span>
+                <h2 className={style.name}>{name}</h2> 
+                <div className={style.cost}>
+                    <div className={style.costLeft}>
+                        <span className={style.costInfo}>Цена</span>
                         <div>
-                        <span className={styles.costDig}>{cost}</span> <span className={styles.costCurrency}>руб.</span>
+                        <span className={style.costDig}>{cost}</span> <span className={style.costCurrency}>руб.</span>
                         </div>
                     </div>
                        {isAdded ? addedIcon : plusIcon}
                 </div>
-                <button className={isFavorite ? styles.liked : styles.like}
+                <button className={isFavorite ? style.liked : style.like}
                     onClick = {onFavoriteClick}>
                     <Like/>
                 </button>
