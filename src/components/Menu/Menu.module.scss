@@ -1,19 +1,19 @@
-@import '../Styles/_variables';
-.menu{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #fff;
-    z-index: 100;
+@import '../../Styles/_variables';
+.menu {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	background-color: #fff;
+	z-index: 100;
 }
-.list{
-    display: flex;
-    justify-content: space-around;
+.list {
+	display: flex;
+	justify-content: space-around;
 }
-.searchContainer{
-    display: flex;
-    width: 100%;
-    justify-content: center;
+.searchContainer {
+	display: flex;
+	width: 100%;
+	justify-content: center;
 }

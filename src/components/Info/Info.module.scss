@@ -1,60 +1,30 @@
-@import '../Styles/variables';
-.info{
-    display: grid;
-    height: 100%;
-    @extend %font-family
+@import '../../Styles/variables';
+.info {
+	display: grid;
+	height: 100%;
+	@extend %font-family;
 }
-.container{
-    width: 14vw;
-    min-width: 265px;
-    place-self: center;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    flex-direction: column;
+.container {
+	width: 14vw;
+	min-width: 265px;
+	place-self: center;
+	display: flex;
+	text-align: center;
+	align-items: center;
+	flex-direction: column;
 }
-.avatar{
-    margin-bottom: 24px;
+.avatar {
+	margin-bottom: 24px;
 }
-.title{
-    @extend %font-family;
-        font-weight: 600;
-        font-size: 22px;
-        margin-bottom: 10px;
+.title {
+	@extend %font-family;
+	font-weight: 600;
+	font-size: 22px;
+	margin-bottom: 10px;
 }
-.subtitle{
-    @extend %font-family;
-    font-weight: 400;
-    font-size: 16px;
-    margin-bottom: 40px;
+.subtitle {
+	@extend %font-family;
+	font-weight: 400;
+	font-size: 16px;
+	margin-bottom: 40px;
 }
-// @media screen and (min-width:1440px) and (max-width: 1920px){
-//     .container{
-//         width: 16vw;
-//     }
-// }
-// @media screen and (min-width:1440px) and (max-width: 1490px){
-//     .container{
-//         width: 18vw;
-//     }
-// }
-// @media screen and (min-width:1024px) and (max-width: 1440px){
-//     .container{
-//         width: 20vw;
-//     }
-// }
-// @media screen and (min-width:896px) and (max-width: 1024px){
-//     .container{
-//         width: 27vw;
-//     }
-// }
-// @media screen and (min-width:768px) and (max-width: 896px){
-//     .container{
-//         width: 35vw;
-//     }
-// }
-// @media screen and (min-width:425px) and (max-width: 768px){
-//     .container{
-//         width: 50vw;
-//     }
-// }

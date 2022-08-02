@@ -1,57 +1,58 @@
-@import '../Styles/variables';
+@import '../../Styles/variables';
 
-.submitButton{
-    display: flex;
-    @extend %font-family;
-    background-color: $premial;
-    border-radius: 18px;
-    font-weight: 500;
-    font-size: 18px;
-    padding: 18px 30px 18px 30px;
-    color: #fff;
-    width: 89%;
-    min-width: 250px;
-    transition: $transition;
-    &:hover{
-        background-color: darken($premial, 20%);
-        svg{
-            transform: translateX(5px);
-        }
-    }
-    span{
-        flex-grow: 1;
-    }
-    svg{
-        transition: $transition;
-        align-self: center;
-    }
+.submitButton {
+	display: flex;
+	@extend %font-family;
+	background-color: $premial;
+	border-radius: 18px;
+	font-weight: 500;
+	font-size: 18px;
+	padding: 18px 30px;
+	color: #fff;
+	width: 89%;
+	min-width: 250px;
+	transition: $transition;
+	margin: 0 auto;
+	&:hover {
+		background-color: darken($premial, 20%);
+		svg {
+			transform: translateX(5px);
+		}
+	}
+	span {
+		flex-grow: 1;
+	}
+	svg {
+		transition: $transition;
+		align-self: center;
+	}
 }
-.reversed{
-    flex-flow: row-reverse;
-    display: flex;
-    @extend %font-family;
-    background-color: $premial;
-    border-radius: 18px;
-    font-weight: 500;
-    font-size: 18px;
-    padding: 18px 30px 18px 30px;
-    color: #fff;
-    width: 89%;
-    min-width: 250px;
-    transition: $transition;
-    svg{
-        transform: rotateY(180deg);
-        transition: $transition;
-        align-self: center;
-        margin-right: 12px;
-    }
-    span{
-        flex-grow: 1;
-    }
-    &:hover{
-        background-color: darken($premial, 20%);
-        svg{
-            transform: translateX(-10px) rotateY(180deg);
-        }
-    }
+.reversed {
+	flex-flow: row-reverse;
+	display: flex;
+	@extend %font-family;
+	background-color: $premial;
+	border-radius: 18px;
+	font-weight: 500;
+	font-size: 18px;
+	padding: 18px 30px;
+	color: #fff;
+	width: 89%;
+	min-width: 250px;
+	transition: $transition;
+	svg {
+		transform: rotateY(180deg);
+		transition: $transition;
+		align-self: center;
+		margin-right: 12px;
+	}
+	span {
+		flex-grow: 1;
+	}
+	&:hover {
+		background-color: darken($premial, 20%);
+		svg {
+			transform: translateX(-10px) rotateY(180deg);
+		}
+	}
 }
