@@ -6,16 +6,16 @@ import styles from './Menu.module.scss';
 
 function Menu({ setBagisOpen }) {
 	const [searchBarIsVisible, setSearchBarIsVisible] = useState(false);
-	const searchBarAnimation = {
-		hidden: {
-			position: 'absolute',
-			bottom: '-100%',
-		},
-		visible: {
-			position: 'absolute',
-			bottom: '200px',
-		},
-	};
+	// const searchBarAnimation = {
+	// 	hidden: {
+	// 		position: 'absolute',
+	// 		bottom: '-100%',
+	// 	},
+	// 	visible: {
+	// 		position: 'absolute',
+	// 		bottom: '200px',
+	// 	},
+	// };
 	return (
 		<div className={styles.menu}>
 			<div className={styles.container}>
