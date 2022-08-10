@@ -1,25 +1,30 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './header.module.scss';
 import logo from './img/logo.jpg';
 import AppContext from '../../Context/Context';
+import { SearchIcon } from '../SearchBar/SearchBar';
 function Logo() {
+	const { setBagIsOpen } = React.useContext(AppContext);
 	return (
 		<Link to="/">
-			<div className={`${styles.logo} ${styles.logoContainer}`}>
-				<img src={logo} alt="Logo" />
-				<div className={styles.logoInfo}>
-					<h2>REACT SNEAKERS</h2>
-					<p>Магазин лучших кроссовок</p>
+			<button onClick={() => setBagIsOpen()} className={styles.logo}>
+				<div className={styles.logoContainer}>
+					<img src={logo} alt="Logo" />
+					<div className={styles.logoInfo}>
+						<h2>REACT SNEAKERS</h2>
+						<p>Магазин лучших кроссовок</p>
+					</div>
 				</div>
-			</div>
+			</button>
 		</Link>
 	);
 }
 function Home() {
+	const { setBagIsOpen } = React.useContext(AppContext);
 	return (
 		<Link to="/">
-			<button className={styles.btn}>
+			<button className={styles.btn} onClick={() => setBagIsOpen()}>
 				<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
 					<path
 						d="M4.225 20.775V9.1L12 3.25l7.775 5.85v11.675h-5.85v-6.8H10.1v6.8ZM6.1 18.9h2.125v-6.8H15.8v6.8h2.1v-8.875L12 5.6l-5.9 4.425Zm5.9-6.65Z"
@@ -69,9 +74,10 @@ function BagBtn({ setBagisOpen }) {
 }
 
 function FavoritesBtn() {
+	const { setBagIsOpen } = React.useContext(AppContext);
 	return (
 		<Link to="/favorites">
-			<button className={styles.btn}>
+			<button className={styles.btn} onClick={() => setBagIsOpen()}>
 				<svg
 					width="20"
 					height="20"
@@ -88,9 +94,10 @@ function FavoritesBtn() {
 	);
 }
 function ProfileBtn() {
+	const { setBagIsOpen } = React.useContext(AppContext);
 	return (
 		<Link to="/profile">
-			<button className={styles.btn}>
+			<button className={styles.btn} onClick={() => setBagIsOpen()}>
 				<svg
 					width="20"
 					height="20"
@@ -108,26 +115,58 @@ function ProfileBtn() {
 		</Link>
 	);
 }
-function Header({ setBagisOpen }) {
+
+function Header(props) {
+	const { setBagIsOpen } = props;
+	const { searchBarIsVisible, setSearchBarIsVisible } = React.useContext(AppContext);
+	// const [activeTab, setActiveTab] = useState(null);
+
 	return (
 		<header className={styles.header}>
 			<div className={styles.container}>
 				<Logo />
 				<nav>
 					<ul className={styles.nav}>
-						<li className={`${styles.item} ${styles.bag}`}>
-							<BagBtn setBagisOpen={setBagisOpen} />
-						</li>
-						<li className={styles.item}>
-							<FavoritesBtn />
-						</li>
-						<li className={styles.item}>
-							<ProfileBtn />
-						</li>
+						<Tab>
+							<li
+								className={`${styles.item} ${styles.home}`}
+								onClick={() => console.log('hello world')}>
+								<Home />
+							</li>
+							<li className={`${styles.item} ${styles.bag}`}>
+								<BagBtn setBagisOpen={setBagIsOpen} />
+							</li>
+							<li className={`${styles.item} ${styles.searchIcon}`}>
+								<SearchIcon
+									setSearchBarIsVisible={() => setSearchBarIsVisible(!searchBarIsVisible)}
+								/>
+							</li>
+							<li className={styles.item}>
+								<FavoritesBtn />
+							</li>
+							<li className={styles.item}>
+								<ProfileBtn />
+							</li>
+						</Tab>
 					</ul>
 				</nav>
 			</div>
 		</header>
 	);
+}
+function Tab(props) {
+	return React.Children.map(props.children, (child) => {
+		return React.cloneElement(child, {
+			onClick: (e) => {
+				if (e.currentTarget.tagName.toLowerCase() === 'li') {
+					const siblings = e.currentTarget.parentNode.children;
+					for (let i = 0; i < siblings.length; i++) {
+						siblings[i].classList.remove(styles.itemActive);
+					}
+					e.currentTarget.classList.add(styles.itemActive);
+				}
+			},
+		});
+	});
 }
 export { Header, ProfileBtn, FavoritesBtn, BagBtn, Logo, Home };

@@ -30,8 +30,17 @@
 	outline: none;
 }
 @media screen and (max-width: 642px) {
-	.search-bar {
-		box-shadow: 0px 0px 20px 0px #0000001c;
+	.container {
+		border: none;
+	}
+	.searchBar {
 		border-radius: 20px;
 	}
+	// .search-bar--Active {
+	// 	position: absolute;
+	// 	box-shadow: 0px 0px 20px 0px #0000001c;
+	// 	border-radius: 20px;
+	// 	bottom: 100px;
+	// 	visibility: visible;
+	// }
 }

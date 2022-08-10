@@ -24,7 +24,10 @@
 		}
 	}
 }
-
+.home,
+.searchIcon {
+	display: none;
+}
 .logo {
 	@extend %font-family;
 	h2 {
@@ -66,5 +69,39 @@
 	.cost,
 	.cost ~ span {
 		display: none;
+	}
+	.header {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 60px;
+		background-color: #fff;
+		z-index: 100;
+		min-height: 60px;
+	}
+	.container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 2%;
+	}
+	.item {
+		flex-grow: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.itemActive {
+		background-color: $main-color;
+	}
+	.logo {
+		display: none;
+	}
+	nav {
+		width: 100%;
+	}
+	.item button {
+		margin: 0;
 	}
 }

@@ -9,7 +9,7 @@ import ErrorBoundry from '../ErrorBoundry/ErrorBoundry';
 import Info from '../Info/Info';
 
 function Catalog({ title, data, emptyPage }) {
-	const { favorites, bagItems, setBagItems, setFavorites, isLoading } =
+	const { favorites, bagItems, setBagItems, setFavorites, isLoading, searchBarIsVisible } =
 		React.useContext(AppContext);
 	let key = 0;
 
@@ -98,7 +98,7 @@ function Catalog({ title, data, emptyPage }) {
 		<main className={styles.catalog}>
 			<div className={styles.header}>
 				<h1 className={styles.title}>{title}</h1>
-				<div className={styles.searchContainer}>
+				<div className={searchBarIsVisible ? styles.searchContainerActive : styles.searchContainer}>
 					<SearchBar search={(value) => search(value)} />
 				</div>
 			</div>

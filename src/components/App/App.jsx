@@ -5,8 +5,6 @@ import { getData, postData } from '../../services/getData';
 import ShoppingBag from '../ShoppingBag/ShoppingBag';
 import { Home, Favorites, Orders } from '../Pages/Pages';
 import AppContext from '../../Context/Context';
-import Menu from '../Menu/Menu';
-import useWindowWidth from '../../customHooks/useWindowWidth';
 import style from './App.module.scss';
 
 function App() {
@@ -46,7 +44,17 @@ function App() {
 		setTotal(sum);
 		setTax(Number(((sum / 100) * 5).toFixed()));
 	}, [bagItems, isLoading]);
-
+	const openBag = () => {
+		const body = document.querySelector('body');
+		if (bagisOpen) {
+			body.style.overflow = 'auto';
+			setBagIsOpen(false);
+		} else {
+			body.style.overflow = 'hidden';
+			setBagIsOpen(true);
+			setSearchBarIsVisible(false);
+		}
+	};
 	return (
 		<AppContext.Provider
 			value={{
@@ -66,24 +74,12 @@ function App() {
 				setBagIsOpen,
 			}}>
 			<div className={style.wrapper}>
-				{useWindowWidth() <= 625 ? (
-					<div className={style.container}>
-						<Menu setBagisOpen={() => setBagIsOpen(!bagisOpen)} />
-					</div>
-				) : (
-					<>
-						<div className={style.container}>
-							<Routes>
-								<Route
-									path="*"
-									element={<Header setBagisOpen={() => setBagIsOpen(!bagisOpen)} />}
-								/>
-							</Routes>
-						</div>
-						<div className={style.sectionDevider}></div>
-					</>
-				)}
-				{bagisOpen && <ShoppingBag setBagisOpen={() => setBagIsOpen(false)} />}
+				<div className={style.container}>
+					<Routes>
+						<Route path="*" element={<Header setBagIsOpen={openBag} />} />
+					</Routes>
+				</div>
+				{bagisOpen && <ShoppingBag setBagisOpen={openBag} />}
 
 				<div className={style.container}>
 					<Routes>
