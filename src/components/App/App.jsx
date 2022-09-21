@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Header } from '../Header/Header';
 import { getData, postData } from '../../services/getData';
@@ -45,14 +45,14 @@ function App() {
 		setTax(Number(((sum / 100) * 5).toFixed()));
 	}, [bagItems, isLoading]);
 	const openBag = () => {
-		const body = document.querySelector('body');
+		// const body = document.querySelector('body');
 		if (bagisOpen) {
-			body.style.overflow = 'auto';
+			// body.style.overflow = 'auto';
 			setBagIsOpen(false);
 		} else {
-			body.style.overflow = 'hidden';
+			// body.style.overflow = 'hidden';
 			setBagIsOpen(true);
-			setSearchBarIsVisible(false);
+			// setSearchBarIsVisible(false);
 		}
 	};
 	return (
